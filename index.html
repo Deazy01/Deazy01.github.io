@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joshua Kofoworola - Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f4f7f6;
+        --text-primary: #2c3e50;
+        --text-secondary: #34495e;
+        --accent-primary: #3498db;
+        --accent-secondary: #2ecc71;
+        --accent-hover: #2980b9;
+        --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Image Modal Styling */
+      .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        animation: zoom-in 0.3s ease;
+        border-radius: 10px;
+      }
+
+      @keyframes zoom-in {
+        from {
+          transform: scale(0.7);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      .close-modal:hover {
+        color: var(--accent-primary);
+      }
+
+      /* Header Styling */
+      header {
+        background: var(--gradient-primary);
+        color: white;
+        text-align: center;
+        padding: 5rem 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.1);
+        transform: skewY(-6deg);
+        transform-origin: top left;
+        z-index: 1;
+      }
+
+      .profile-image {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 8px solid white;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 2;
+        transition: all 0.4s ease;
+      }
+
+      .profile-image:hover {
+        transform: scale(1.05) rotate(3deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .header-title {
+        font-family: "Bebas Neue", cursive;
+        font-size: 4rem;
+        margin-top: 1.5rem;
+        letter-spacing: 2px;
+        position: relative;
+        z-index: 2;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 0.5rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .social-links a:hover {
+        transform: scale(1.2) translateY(-5px);
+        color: var(--accent-secondary);
+      }
+
+      /* Container and Section Styling */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .section {
+        background: white;
+        border-radius: 15px;
+        padding: 3rem;
+        margin: 2rem 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--gradient-primary);
+      }
+
+      .section-title {
+        font-family: "Bebas Neue", cursive;
+        text-align: center;
+        color: var(--accent-primary);
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+      }
+
+      /* Projects Styling */
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: var(--bg-secondary);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+      }
+
+      .project-images img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .project-images img:hover {
+        transform: scale(1.1);
+      }
+
+      .project-content {
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .project-title {
+        font-family: "Bebas Neue", cursive;
+        color: var(--accent-primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+      }
+
+      /* Footer Styling */
+      footer {
+        background: var(--text-primary);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      footer .heart {
+        color: var(--accent-secondary);
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+
+      .tech-skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .skill-category {
+        background: var(--bg-secondary);
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .skill-category:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-category h3 {
+        font-family: "Bebas Neue", cursive;
+        color: var(--accent-primary);
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+      }
+
+      .skill-icons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+      }
+
+      .skill-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .skill-icon i {
+        font-size: 2.5rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .skill-icon span {
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+      }
+
+      /* Language Icons */
+      .fa-python {
+        color: #3776ab;
+      }
+      .fa-java {
+        color: #007396;
+      }
+      .fa-code {
+        color: #777bb3;
+      }
+      .fa-database {
+        color: #336791;
+      }
+      .devicon-r {
+        color: #198ce7;
+      }
+
+      .skill-icon:hover i {
+        transform: scale(1.2);
+      }
+
+      /* Custom icon for specific technologies */
+      .devicon-pytorch::before {
+        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M17.776 7.953l-3.416 3.417 4.588 4.588 1.12-1.12a2.006 2.006 0 0 1 2.837 0l2.047 2.047c.784.783.784 2.053 0 2.837l-9.506 9.505a2.006 2.006 0 0 1-2.837 0l-2.047-2.047a2.006 2.006 0 0 1 0-2.837l1.12-1.12-4.588-4.588-3.417 3.416c-2.107 2.108-2.107 5.528 0 7.635l9.504 9.505c2.107 2.107 5.527 2.107 7.635 0l9.505-9.505c2.107-2.107 2.107-5.527 0-7.635l-9.505-9.504c-2.107-2.107-5.527-2.107-7.635 0z" fill="%23EE4C2C"/></svg>');
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .header-title {
+          font-size: 3rem;
+        }
+
+        .profile-image {
+          width: 220px;
+          height: 220px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img class="image-modal-content" id="modalImage" />
+    </div>
+
+    <header>
+      <img src="heroImage.jpg" alt="Joshua Kofoworola" class="profile-image" />
+      <h1 class="header-title">Joshua Kofoworola</h1>
+      <p class="header-subtitle">
+        Oakland, CA | 510-689-6560 |
+        <a
+          href="mailto:Kofoworolajoshua28@gmail.com"
+          style="color: white; text-decoration: none"
+        >
+          Kofoworolajoshua28@gmail.com
+        </a>
+      </p>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/joshua-kofoworola-0538aa346">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/Deazy01">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section">
+        <h2 class="section-title">Education</h2>
+        <ul>
+          <li>
+            <strong>Laney College | Oakland, CA</strong>
+            <p>
+              BA in Computer Engineering | CGPA: 3.64 | Expected graduation: May
+              2025
+            </p>
+          </li>
+          <li>
+            <strong>Relevant Courses</strong>
+            <p>
+              Intro to Programming, Calculus, Data Structures, Object-Oriented
+              Programming, App Development, DevOps Automation, Embedded Systems,
+              Control Systems
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Experience</h2>
+        <ul>
+          <li>
+            <strong>N.A.F - Software Fremont Engineer Extern</strong>
+            <p>Kaduna, Nigeria (May 2023 — Aug 2023)</p>
+            <p>
+              Spearheaded the development of a maintenance tracking system,
+              increasing accountability and improving efficiency of maintenance
+              routines by 50%.
+            </p>
+          </li>
+          <li>
+            <p>
+              Processed and analyzed a 10,000-entry dataset in JSON format,
+              leveraging TFIDF and unigram models.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects">
+          <div class="project-card">
+            <div class="project-images">
+              <img
+                src="loraWan.png"
+                alt="LoRaWAN Project"
+                onclick="openModal(this)"
+              />
+              <img
+                src="loraTerminals.png"
+                alt="LoRa Terminals"
+                onclick="openModal(this)"
+              />
+              <img
+                src="hardware2.jpg"
+                alt="Hardware Setup"
+                onclick="openModal(this)"
+              />
+              <img
+                src="lora.jpg"
+                alt="LoRa Hardware Test"
+                onclick="openModal(this)"
+              />
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">
+                LoRaWAN-Based Secure Communication System
+              </h3>
+              <p>
+                A secure communication system for the Nigerian military using
+                LoRaWAN and Expo.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-images">
+              <img
+                src="healthmonitor1.png"
+                alt="Health Monitor Software"
+                onclick="openModal(this)"
+              />
+              <img
+                src="glucometer.png"
+                alt="Glucometer"
+                onclick="openModal(this)"
+              />
+              <img
+                src="healthMonitor2.png"
+                alt="Health Monitor"
+                onclick="openModal(this)"
+              />
+              <img
+                src="iotHardware.png"
+                alt="IoT Hardware"
+                onclick="openModal(this)"
+              />
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">IoT Blood Sugar Monitor</h3>
+              <p>
+                An IoT-enabled device for real-time health monitoring and
+                patient care.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="tech-skills">
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-icons">
+              <div class="skill-icon">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fab fa-java"></i>
+                <span>Java</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-code"></i>
+                <span>C/C++</span>
+              </div>
+              <div class="skill-icon">
+                <i class="devicon-r"></i>
+                <span>R</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Libraries & Frameworks</h3>
+            <div class="skill-icons">
+              <div class="skill-icon">
+                <i class="devicon-pytorch"></i>
+                <span>PyTorch</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-chart-line"></i>
+                <span>Pandas</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-superscript"></i>
+                <span>NumPy</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-chart-pie"></i>
+                <span>Matplotlib</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Developer Tools</h3>
+            <div class="skill-icons">
+              <div class="skill-icon">
+                <i class="fab fa-git-alt"></i>
+                <span>Git</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fab fa-docker"></i>
+                <span>Docker</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fab fa-linux"></i>
+                <span>UNIX</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-terminal"></i>
+                <span>Regex</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Databases</h3>
+            <div class="skill-icons">
+              <div class="skill-icon">
+                <i class="fas fa-database"></i>
+                <span>SQL</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-server"></i>
+                <span>MongoDB</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-table"></i>
+                <span>PostgreSQL</span>
+              </div>
+              <div class="skill-icon">
+                <i class="fas fa-columns"></i>
+                <span>pgAdmin</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made with <i class="fas fa-heart heart"></i> by Joshua Kofoworola</p>
+      <p>&copy; 2025 Joshua Kofoworola</p>
+    </footer>
+
+    <script>
+      function openModal(imgElement) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        modal.style.display = "flex";
+        modalImg.src = imgElement.src;
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+      }
+
+      // Close modal when clicking outside the image
+      window.onclick = function (event) {
+        const modal = document.getElementById("imageModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
