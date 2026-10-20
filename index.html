@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Joshua Kofoworola — Computer Engineering Portfolio</title>
-<meta name="description" content="Joshua Kofoworola — UC Davis Computer Engineering student building embedded systems, IoT devices, and software. Python, C/C++, ESP32, LoRaWAN, React Native." />
+<title>Joshua Kofoworola — Embedded Systems & Software Engineering Intern</title>
+<meta name="description" content="Joshua Kofoworola — UC Davis Computer Engineering student seeking Summer 2027 internships in embedded systems, IoT, and software engineering. ESP32, LoRaWAN, Python, C/C++, React Native." />
 <style>
   :root{
-    --bg:#0b1020; --bg2:#0f1730; --card:#131c38; --card2:#182242;
-    --text:#e8ecf7; --muted:#a7b0cc; --accent:#4da3ff; --accent2:#37d99a;
-    --border:#26315c; --chip:#1b2750;
+    --bg:#0b1020; --bg2:#0f1730; --card:#131c38; --text:#e8ecf7; --muted:#a7b0cc;
+    --accent:#4da3ff; --accent2:#37d99a; --border:#26315c; --chip:#1b2750;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -18,56 +17,64 @@
   a:hover{text-decoration:underline}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
-  /* Nav */
   nav{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:14px;padding-bottom:14px}
   .logo{font-weight:800;font-size:1.15rem;color:var(--text);letter-spacing:.5px}
   .logo span{color:var(--accent2)}
   .navlinks a{color:var(--muted);margin-left:22px;font-size:.95rem}
   .navlinks a:hover{color:var(--text);text-decoration:none}
+  .navlinks a.resume-link{color:var(--accent2);font-weight:700}
   @media(max-width:640px){.navlinks a{margin-left:12px;font-size:.85rem}}
 
-  /* Hero */
-  header{padding:84px 0 64px;background:radial-gradient(1000px 420px at 20% -10%,#1d3a7a 0%,transparent 60%),radial-gradient(800px 380px at 90% 0%,#0f5136 0%,transparent 55%),var(--bg2);border-bottom:1px solid var(--border)}
-  .badge{display:inline-block;background:var(--chip);border:1px solid var(--border);color:var(--accent2);padding:5px 14px;border-radius:999px;font-size:.83rem;font-weight:600;letter-spacing:.4px}
+  header{padding:72px 0 60px;background:radial-gradient(1000px 420px at 20% -10%,#1d3a7a 0%,transparent 60%),radial-gradient(800px 380px at 90% 0%,#0f5136 0%,transparent 55%),var(--bg2);border-bottom:1px solid var(--border)}
   .profile-photo{width:168px;height:168px;border-radius:50%;object-fit:cover;border:4px solid var(--accent);box-shadow:0 12px 32px rgba(0,0,0,.45);display:block;margin-bottom:26px}
-  h1{font-size:3rem;line-height:1.12;margin:20px 0 10px;font-weight:800}
+  .badge{display:inline-block;background:var(--chip);border:1px solid var(--border);color:var(--accent2);padding:5px 14px;border-radius:999px;font-size:.83rem;font-weight:600;letter-spacing:.4px}
+  h1{font-size:3rem;line-height:1.12;margin:18px 0 6px;font-weight:800}
   h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .tagline{font-size:1.22rem;color:var(--muted);max-width:680px}
-  .hero-meta{margin-top:18px;color:var(--muted);font-size:.98rem}
-  .hero-actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:12px 24px;border-radius:10px;font-weight:700;font-size:.97rem;border:1px solid var(--border)}
-  .btn-primary{background:linear-gradient(90deg,var(--accent),#2f7fe0);color:#fff;border:none}
+  .headline{font-size:1.35rem;font-weight:700;color:var(--text)}
+  .tagline{font-size:1.08rem;color:var(--muted);max-width:700px;margin-top:10px}
+  .hero-meta{margin-top:16px;color:var(--muted);font-size:.97rem}
+  .hero-actions{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 26px;border-radius:10px;font-weight:700;font-size:1rem;border:1px solid var(--border)}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),#2f7fe0);color:#fff;border:none;font-size:1.05rem;padding:14px 30px}
   .btn-primary:hover{text-decoration:none;opacity:.92}
   .btn-ghost{background:transparent;color:var(--text)}
   .btn-ghost:hover{text-decoration:none;border-color:var(--accent)}
   @media(max-width:640px){h1{font-size:2.2rem}}
 
-  /* Sections */
-  section{padding:64px 0 8px}
+  section{padding:60px 0 8px}
   h2{font-size:1.9rem;margin-bottom:8px;font-weight:800}
   h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));margin-top:10px}
   .section-sub{color:var(--muted);margin-bottom:28px;max-width:720px}
 
-  /* Projects */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;transition:transform .25s ease,border-color .25s ease}
-  .card:hover{transform:translateY(-5px);border-color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:26px}
   .card .kicker{font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent2)}
-  .card h3{font-size:1.3rem;margin:8px 0 10px}
-  .card p{color:var(--muted);font-size:.96rem}
-  .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .card h3{font-size:1.45rem;margin:8px 0 4px}
+  .card h4{font-size:.95rem;color:var(--accent);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.8px}
+  .card p{color:var(--muted);font-size:.97rem}
+  .card p strong{color:var(--text)}
+  .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
   .tag{background:var(--chip);border:1px solid var(--border);color:var(--text);font-size:.78rem;padding:4px 11px;border-radius:999px}
-  .card .links{margin-top:18px;font-size:.92rem;font-weight:600}
-  .card .links a{margin-right:16px}
+  .card .links{margin-top:16px;font-size:.95rem;font-weight:600}
+  .card .links a{margin-right:18px}
+  .photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+  .photos img{width:100%;height:190px;object-fit:cover;border-radius:10px;border:1px solid var(--border)}
+  .shot{margin-top:16px}
+  .shot img{width:100%;border-radius:10px;border:1px solid var(--border)}
+  .shot figcaption,.photos-cap{color:var(--muted);font-size:.83rem;margin-top:6px}
+  .arch{margin-top:16px;background:#0d1430;border:1px solid var(--border);border-radius:10px;padding:14px;overflow-x:auto}
+  .arch svg{display:block;min-width:520px;width:100%;height:auto}
+  .metrics{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+  .metric{background:#0d1430;border:1px solid var(--border);border-radius:10px;padding:12px 18px}
+  .metric .num{font-size:1.3rem;font-weight:800;color:var(--accent2)}
+  .metric .lbl{font-size:.8rem;color:var(--muted)}
 
-  /* Skills */
-  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
-  .skill-group{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px}
-  .skill-group h3{font-size:1.05rem;margin-bottom:14px;color:var(--accent)}
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .skill-group{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+  .skill-group h3{font-size:1.1rem;margin-bottom:6px;color:var(--accent)}
+  .skill-group p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
 
-  /* Timeline-ish blocks */
   .block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:20px}
   .block h3{font-size:1.18rem}
   .block .when{color:var(--accent2);font-size:.9rem;font-weight:600}
@@ -90,6 +97,7 @@
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
+      <a class="resume-link" href="resume.pdf" download>⬇ Resume</a>
     </div>
   </div>
 </nav>
@@ -97,15 +105,15 @@
 <header>
   <div class="wrap">
     <img class="profile-photo" src="profile.jpg" alt="Joshua Kofoworola" />
-    <span class="badge">Open to internships &amp; entry-level roles</span>
-    <h1>Joshua Kofoworola<br /><span class="grad">Computer Engineering</span></h1>
-    <p class="tagline">UC Davis computer engineering student building embedded systems, IoT devices, and the software that runs on them — from ESP32 firmware and LoRa radios to full-stack apps and search engines.</p>
-    <p class="hero-meta">Oakland, CA &nbsp;·&nbsp; B.Eng. Computer Engineering, UC Davis (Aug 2027)</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#projects">View Projects</a>
+    <h1>Joshua Kofoworola</h1>
+    <div class="headline"><span class="grad">Embedded Systems &amp; Software Engineering Intern</span></div>
+    <div class="hero-actions" style="margin-top:18px">
+      <a class="btn btn-primary" href="resume.pdf" download>⬇ Download Resume</a>
       <a class="btn btn-ghost" href="https://github.com/Deazy01" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/joshua-kofoworola" target="_blank" rel="noopener">LinkedIn</a>
     </div>
+    <p class="tagline">UC Davis computer engineering student seeking Summer 2027 internships. I build ESP32 and LoRa hardware that talks to real software — firmware, IoT devices, mobile apps, and a from-scratch search engine in Python.</p>
+    <p class="hero-meta">Oakland, CA &nbsp;·&nbsp; B.Eng. Computer Engineering, UC Davis (Aug 2027) &nbsp;·&nbsp; Authorized to work in the US (permanent resident)</p>
   </div>
 </header>
 
@@ -113,80 +121,143 @@
 
   <section id="projects">
     <h2>Projects</h2>
-    <p class="section-sub">Things I have designed, built, and shipped — hardware and software.</p>
-    <div class="grid">
+    <p class="section-sub">Each project below follows the same story: the challenge, what I built, and the result — with photos, architecture, and code.</p>
 
-      <div class="card">
-        <div class="kicker">Python · Search Engine</div>
-        <h3>pysearch</h3>
-        <p>A full-text search engine built from scratch in Python: a rule-based tokenizer, positional inverted index, TF-IDF ranking with cosine similarity, and a phrase/boolean query parser. Ships with a Flask REST API, a small web UI, and 37 passing tests.</p>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">TF-IDF</span><span class="tag">Algorithms</span><span class="tag">pytest</span>
-        </div>
-        <div class="links">
-          <a href="https://github.com/Deazy01/pysearch" target="_blank" rel="noopener">GitHub Repo →</a>
-        </div>
+    <div class="card">
+      <div class="kicker">Embedded · LoRa + BLE · ESP32</div>
+      <h3>Offline BLE + LoRa Chat App</h3>
+      <h4>The challenge</h4>
+      <p>When cell networks and Wi-Fi are down — disasters, rural areas, dead zones — off-the-shelf messaging apps are useless. I wanted messaging that works with <strong>no infrastructure at all</strong>.</p>
+      <h4>What I built</h4>
+      <p>A chat system that routes messages over <strong>Bluetooth Low Energy</strong> for nearby devices and <strong>LoRa radio</strong> for long range, running on ESP32 hardware I assembled and programmed in C/C++.</p>
+      <div class="arch" aria-label="Architecture diagram">
+        <svg viewBox="0 0 720 90" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+          <rect x="5" y="25" width="130" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="70" y="50" fill="#e8ecf7" text-anchor="middle">Chat App (phone)</text>
+          <rect x="205" y="25" width="130" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="270" y="50" fill="#e8ecf7" text-anchor="middle">ESP32 node</text>
+          <rect x="405" y="25" width="130" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="470" y="50" fill="#e8ecf7" text-anchor="middle">ESP32 node</text>
+          <rect x="585" y="25" width="130" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="650" y="50" fill="#e8ecf7" text-anchor="middle">Peer phone</text>
+          <text x="170" y="40" fill="#37d99a" text-anchor="middle">BLE</text><line x1="135" y1="52" x2="205" y2="52" stroke="#37d99a" stroke-width="2"/>
+          <text x="370" y="40" fill="#37d99a" text-anchor="middle">LoRa</text><line x1="335" y1="52" x2="405" y2="52" stroke="#37d99a" stroke-width="2"/>
+          <text x="560" y="40" fill="#37d99a" text-anchor="middle">BLE</text><line x1="535" y1="52" x2="585" y2="52" stroke="#37d99a" stroke-width="2"/>
+        </svg>
       </div>
-
-      <div class="card">
-        <div class="kicker">Embedded · LoRa + BLE</div>
-        <h3>Offline BLE + LoRa Chat App</h3>
-        <p>An off-grid messaging app that keeps people talking with no internet and no cell service, relaying messages over Bluetooth Low Energy and long-range LoRa radio on ESP32 hardware.</p>
-        <div class="tags">
-          <span class="tag">ESP32</span><span class="tag">LoRa</span><span class="tag">BLE</span><span class="tag">C/C++</span>
-        </div>
-        <div class="links">
-          <a href="https://github.com/Deazy01/LoraWanCommunications" target="_blank" rel="noopener">GitHub Repo →</a>
-        </div>
+      <div class="photos">
+        <img src="lora.jpg" alt="LoRa hardware test setup" />
+        <img src="loraTerminals.png" alt="Chat terminals running the offline messaging system" />
       </div>
-
-      <div class="card">
-        <div class="kicker">IoT · LoRaWAN</div>
-        <h3>LoRaWAN Secure Communication System</h3>
-        <p>A secure long-range communication system built on LoRaWAN, designed for reliable messaging where conventional networks are unavailable or untrusted.</p>
-        <div class="tags">
-          <span class="tag">LoRaWAN</span><span class="tag">IoT</span><span class="tag">Embedded Systems</span><span class="tag">Security</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="kicker">IoT · Health Tech</div>
-        <h3>IoT Blood Sugar Monitor</h3>
-        <p>A connected glucose-monitoring device built around ESP32 hardware I assembled, streaming readings over BLE to a React Native app with Firebase for real-time patient monitoring.</p>
-        <div class="tags">
-          <span class="tag">ESP32</span><span class="tag">React Native</span><span class="tag">Firebase</span><span class="tag">BLE</span>
-        </div>
-      </div>
-
+      <p class="photos-cap">The actual hardware and terminals from this build.</p>
+      <h4>The result</h4>
+      <p>Working off-grid messaging between devices with zero internet or cell service — the phone talks BLE to its ESP32, and ESP32s relay over LoRa.</p>
+      <div class="tags"><span class="tag">ESP32</span><span class="tag">LoRa</span><span class="tag">BLE</span><span class="tag">C/C++</span></div>
+      <div class="links"><a href="https://github.com/Deazy01/LoraWanCommunications" target="_blank" rel="noopener">GitHub Repo →</a></div>
     </div>
+
+    <div class="card">
+      <div class="kicker">Python · Search Engine · Algorithms</div>
+      <h3>pysearch</h3>
+      <h4>The challenge</h4>
+      <p>Understand how real search engines work by building one with <strong>no search libraries</strong> — every component from first principles.</p>
+      <h4>What I built</h4>
+      <p>A complete full-text search engine in pure Python: a rule-based tokenizer with stemming, a <strong>positional inverted index</strong>, <strong>TF-IDF ranking</strong> with cosine similarity, and a query parser supporting <strong>phrase search and boolean operators</strong> (AND / OR / NOT, parentheses). Includes a Flask REST API, a web UI, and a 37-test pytest suite.</p>
+      <div class="arch" aria-label="Architecture diagram">
+        <svg viewBox="0 0 720 90" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+          <rect x="5" y="25" width="110" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="60" y="50" fill="#e8ecf7" text-anchor="middle">Documents</text>
+          <rect x="160" y="25" width="110" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="215" y="50" fill="#e8ecf7" text-anchor="middle">Tokenizer</text>
+          <rect x="315" y="25" width="130" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="380" y="50" fill="#e8ecf7" text-anchor="middle">Inverted Index</text>
+          <rect x="490" y="25" width="105" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="542" y="50" fill="#e8ecf7" text-anchor="middle">TF-IDF Ranker</text>
+          <rect x="640" y="25" width="75" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="677" y="50" fill="#e8ecf7" text-anchor="middle">API / UI</text>
+          <line x1="115" y1="45" x2="160" y2="45" stroke="#37d99a" stroke-width="2"/><line x1="270" y1="45" x2="315" y2="45" stroke="#37d99a" stroke-width="2"/><line x1="445" y1="45" x2="490" y2="45" stroke="#37d99a" stroke-width="2"/><line x1="595" y1="45" x2="640" y2="45" stroke="#37d99a" stroke-width="2"/>
+        </svg>
+      </div>
+      <figure class="shot">
+        <img src="pysearch-demo.png" alt="pysearch web UI" />
+        <figcaption>The pysearch web UI, running locally.</figcaption>
+      </figure>
+      <h4>The result — measured</h4>
+      <p>Benchmarked on the bundled 40-document demo corpus (1,668 words):</p>
+      <div class="metrics">
+        <div class="metric"><div class="num">2.5 ms</div><div class="lbl">full index build, 40 docs</div></div>
+        <div class="metric"><div class="num">&lt;0.1 ms</div><div class="lbl">avg query latency (600 runs)</div></div>
+        <div class="metric"><div class="num">604</div><div class="lbl">unique indexed terms</div></div>
+        <div class="metric"><div class="num">37 / 37</div><div class="lbl">pytest tests passing</div></div>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">TF-IDF</span><span class="tag">Data Structures</span><span class="tag">pytest</span></div>
+      <div class="links"><a href="https://github.com/Deazy01/pysearch" target="_blank" rel="noopener">GitHub Repo →</a></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">IoT · Health Tech · ESP32</div>
+      <h3>IoT Blood Sugar Monitor</h3>
+      <h4>The challenge</h4>
+      <p>Glucose checks are normally manual, episodic, and easy to skip. I wanted readings captured by a device and visible in an app automatically.</p>
+      <h4>What I built</h4>
+      <p>A monitoring device around an <strong>ESP32</strong> and a <strong>MAX30105 sensor</strong> — hardware I assembled myself — paired with a React Native app that receives readings over BLE and pushes them to <strong>Firebase</strong> for real-time viewing.</p>
+      <div class="arch" aria-label="Architecture diagram">
+        <svg viewBox="0 0 720 90" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+          <rect x="5" y="25" width="140" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="75" y="50" fill="#e8ecf7" text-anchor="middle">MAX30105 sensor</text>
+          <rect x="200" y="25" width="110" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="255" y="50" fill="#e8ecf7" text-anchor="middle">ESP32</text>
+          <rect x="365" y="25" width="150" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="440" y="50" fill="#e8ecf7" text-anchor="middle">React Native app</text>
+          <rect x="570" y="25" width="140" height="40" rx="8" fill="#1b2750" stroke="#4da3ff"/><text x="640" y="50" fill="#e8ecf7" text-anchor="middle">Firebase (real-time)</text>
+          <text x="177" y="40" fill="#37d99a" text-anchor="middle">I2C</text><line x1="145" y1="52" x2="200" y2="52" stroke="#37d99a" stroke-width="2"/>
+          <text x="337" y="40" fill="#37d99a" text-anchor="middle">BLE</text><line x1="310" y1="52" x2="365" y2="52" stroke="#37d99a" stroke-width="2"/>
+          <line x1="515" y1="45" x2="570" y2="45" stroke="#37d99a" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="photos">
+        <img src="healthmonitor1.png" alt="Blood sugar monitor app" />
+        <img src="iotHardware.png" alt="ESP32 hardware build for the monitor" />
+        <img src="glucometer.png" alt="Glucometer reference device" />
+      </div>
+      <p class="photos-cap">The app, the ESP32 hardware build, and the reference glucometer.</p>
+      <h4>The result</h4>
+      <p>An end-to-end pipeline from physical sensor to phone screen: readings flow sensor → ESP32 → app → cloud with no manual entry.</p>
+      <div class="tags"><span class="tag">ESP32</span><span class="tag">MAX30105</span><span class="tag">React Native</span><span class="tag">Firebase</span><span class="tag">BLE</span></div>
+      <div class="links"><a href="https://github.com/Deazy01/IOTGlucometerMobileApplication" target="_blank" rel="noopener">GitHub Repo →</a></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">IoT · LoRaWAN · Secure Comms</div>
+      <h3>LoRaWAN Secure Communication System</h3>
+      <h4>The challenge</h4>
+      <p>Long-range communication in places where conventional networks are unavailable or untrusted needs both reach and security.</p>
+      <h4>What I built</h4>
+      <p>A secure communication system on <strong>LoRaWAN</strong>, using its long-range, low-power links with encrypted payloads, built and tested on real radio hardware.</p>
+      <div class="photos">
+        <img src="loraWan.png" alt="LoRaWAN system" />
+        <img src="hardware2.jpg" alt="LoRa hardware setup" />
+      </div>
+      <p class="photos-cap">The LoRaWAN build and hardware setup.</p>
+      <h4>The result</h4>
+      <p>A working secure long-range link demonstrated on physical hardware — the project that led directly into the BLE + LoRa chat app above.</p>
+      <div class="tags"><span class="tag">LoRaWAN</span><span class="tag">IoT</span><span class="tag">Embedded Systems</span><span class="tag">Security</span></div>
+      <div class="links"><a href="https://github.com/Deazy01/LoraWanCommunications" target="_blank" rel="noopener">Related LoRa work on GitHub →</a></div>
+    </div>
+
   </section>
 
   <section id="skills">
-    <h2>Skills</h2>
-    <p class="section-sub">The tools I reach for, grouped by where I use them.</p>
+    <h2>Skills — by role</h2>
+    <p class="section-sub">Same engineer, two lenses. Each track points at the project that proves it.</p>
     <div class="skill-groups">
       <div class="skill-group">
-        <h3>Languages</h3>
+        <h3>For embedded / IoT roles</h3>
+        <p>Firmware and hardware integration — proven by the LoRa chat system, the LoRaWAN build, and the ESP32 blood sugar monitor.</p>
         <div class="chips">
-          <span class="tag">Python</span><span class="tag">C / C++</span><span class="tag">JavaScript</span>
+          <span class="tag">C / C++</span><span class="tag">ESP32</span><span class="tag">Arduino</span><span class="tag">LoRaWAN</span><span class="tag">BLE</span><span class="tag">GSM</span><span class="tag">Embedded Systems</span><span class="tag">IoT</span>
         </div>
       </div>
       <div class="skill-group">
-        <h3>Software</h3>
+        <h3>For software engineering roles</h3>
+        <p>Algorithms, APIs, and full-stack development — proven by pysearch and the N.A.F maintenance platform.</p>
         <div class="chips">
-          <span class="tag">React Native</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Flask</span><span class="tag">Git / GitHub</span>
+          <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">React Native</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Flask</span><span class="tag">Data Structures</span><span class="tag">Testing (pytest)</span><span class="tag">Git / GitHub</span>
         </div>
       </div>
       <div class="skill-group">
-        <h3>Embedded &amp; IoT</h3>
+        <h3>Machine learning</h3>
+        <p>Applied ML on real data — predictive maintenance at N.A.F and ranking in pysearch.</p>
         <div class="chips">
-          <span class="tag">ESP32</span><span class="tag">Arduino</span><span class="tag">LoRaWAN</span><span class="tag">GSM</span><span class="tag">BLE</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>Focus Areas</h3>
-        <div class="chips">
-          <span class="tag">Embedded Systems</span><span class="tag">IoT</span><span class="tag">Machine Learning</span><span class="tag">TF-IDF</span><span class="tag">Random Forest</span>
+          <span class="tag">Random Forest</span><span class="tag">TF-IDF</span><span class="tag">ML fundamentals</span>
         </div>
       </div>
     </div>
@@ -221,12 +292,13 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p class="section-sub">I am looking for internships and entry-level roles in embedded systems, IoT, and software engineering. The fastest way to reach me is email.</p>
+    <p class="section-sub">Looking for Summer 2027 internships and entry-level roles in embedded systems, IoT, and software engineering. Email is fastest.</p>
     <div class="block">
       <p>
         Email: <a href="mailto:Kofoworolajoshua28@gmail.com">Kofoworolajoshua28@gmail.com</a><br />
         Phone: (510) 689-6569<br />
-        Location: Oakland, CA — open to roles across the US, remote or on-site
+        Location: Oakland, CA — open to roles across the US, remote or on-site<br />
+        Resume: <a href="resume.pdf" download>Download PDF</a>
       </p>
     </div>
   </section>
@@ -238,6 +310,7 @@
     <p>
       <a href="https://github.com/Deazy01" target="_blank" rel="noopener">GitHub</a> ·
       <a href="https://www.linkedin.com/in/joshua-kofoworola" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="resume.pdf" download>Resume</a> ·
       <a href="mailto:Kofoworolajoshua28@gmail.com">Email</a>
     </p>
     <p style="margin-top:10px">© 2026 Joshua Kofoworola</p>
