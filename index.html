@@ -1,610 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joshua Kofoworola - Portfolio</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <style>
-      :root {
-        --bg-primary: #ffffff;
-        --bg-secondary: #f4f7f6;
-        --text-primary: #2c3e50;
-        --text-secondary: #34495e;
-        --accent-primary: #3498db;
-        --accent-secondary: #2ecc71;
-        --accent-hover: #2980b9;
-        --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      }
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Joshua Kofoworola — Computer Engineering Portfolio</title>
+<meta name="description" content="Joshua Kofoworola — UC Davis Computer Engineering student building embedded systems, IoT devices, and software. Python, C/C++, ESP32, LoRaWAN, React Native." />
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#0f1730; --card:#131c38; --card2:#182242;
+    --text:#e8ecf7; --muted:#a7b0cc; --accent:#4da3ff; --accent2:#37d99a;
+    --border:#26315c; --chip:#1b2750;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+  /* Nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:14px;padding-bottom:14px}
+  .logo{font-weight:800;font-size:1.15rem;color:var(--text);letter-spacing:.5px}
+  .logo span{color:var(--accent2)}
+  .navlinks a{color:var(--muted);margin-left:22px;font-size:.95rem}
+  .navlinks a:hover{color:var(--text);text-decoration:none}
+  @media(max-width:640px){.navlinks a{margin-left:12px;font-size:.85rem}}
 
-      body {
-        font-family: "Montserrat", sans-serif;
-        background: var(--bg-secondary);
-        color: var(--text-primary);
-        line-height: 1.6;
-        min-height: 100vh;
-      }
+  /* Hero */
+  header{padding:84px 0 64px;background:radial-gradient(1000px 420px at 20% -10%,#1d3a7a 0%,transparent 60%),radial-gradient(800px 380px at 90% 0%,#0f5136 0%,transparent 55%),var(--bg2);border-bottom:1px solid var(--border)}
+  .badge{display:inline-block;background:var(--chip);border:1px solid var(--border);color:var(--accent2);padding:5px 14px;border-radius:999px;font-size:.83rem;font-weight:600;letter-spacing:.4px}
+  .profile-photo{width:168px;height:168px;border-radius:50%;object-fit:cover;border:4px solid var(--accent);box-shadow:0 12px 32px rgba(0,0,0,.45);display:block;margin-bottom:26px}
+  h1{font-size:3rem;line-height:1.12;margin:20px 0 10px;font-weight:800}
+  h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tagline{font-size:1.22rem;color:var(--muted);max-width:680px}
+  .hero-meta{margin-top:18px;color:var(--muted);font-size:.98rem}
+  .hero-actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 24px;border-radius:10px;font-weight:700;font-size:.97rem;border:1px solid var(--border)}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),#2f7fe0);color:#fff;border:none}
+  .btn-primary:hover{text-decoration:none;opacity:.92}
+  .btn-ghost{background:transparent;color:var(--text)}
+  .btn-ghost:hover{text-decoration:none;border-color:var(--accent)}
+  @media(max-width:640px){h1{font-size:2.2rem}}
 
-      /* Image Modal Styling */
-      .image-modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-      }
+  /* Sections */
+  section{padding:64px 0 8px}
+  h2{font-size:1.9rem;margin-bottom:8px;font-weight:800}
+  h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));margin-top:10px}
+  .section-sub{color:var(--muted);margin-bottom:28px;max-width:720px}
 
-      .image-modal-content {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        animation: zoom-in 0.3s ease;
-        border-radius: 10px;
-      }
+  /* Projects */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;transition:transform .25s ease,border-color .25s ease}
+  .card:hover{transform:translateY(-5px);border-color:var(--accent)}
+  .card .kicker{font-size:.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent2)}
+  .card h3{font-size:1.3rem;margin:8px 0 10px}
+  .card p{color:var(--muted);font-size:.96rem}
+  .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .tag{background:var(--chip);border:1px solid var(--border);color:var(--text);font-size:.78rem;padding:4px 11px;border-radius:999px}
+  .card .links{margin-top:18px;font-size:.92rem;font-weight:600}
+  .card .links a{margin-right:16px}
 
-      @keyframes zoom-in {
-        from {
-          transform: scale(0.7);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
+  /* Skills */
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+  .skill-group{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px}
+  .skill-group h3{font-size:1.05rem;margin-bottom:14px;color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
 
-      .close-modal {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-        cursor: pointer;
-      }
+  /* Timeline-ish blocks */
+  .block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:20px}
+  .block h3{font-size:1.18rem}
+  .block .when{color:var(--accent2);font-size:.9rem;font-weight:600}
+  .block p,.block li{color:var(--muted);font-size:.97rem}
+  .block ul{margin:10px 0 0 20px}
+  .block li{margin-bottom:6px}
 
-      .close-modal:hover {
-        color: var(--accent-primary);
-      }
+  footer{margin-top:72px;border-top:1px solid var(--border);background:var(--bg2);padding:36px 0;text-align:center;color:var(--muted);font-size:.93rem}
+  footer a{margin:0 10px}
+</style>
+</head>
+<body>
 
-      /* Header Styling */
-      header {
-        background: var(--gradient-primary);
-        color: white;
-        text-align: center;
-        padding: 5rem 1rem;
-        position: relative;
-        overflow: hidden;
-      }
-
-      header::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.1);
-        transform: skewY(-6deg);
-        transform-origin: top left;
-        z-index: 1;
-      }
-
-      .profile-image {
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 8px solid white;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        position: relative;
-        z-index: 2;
-        transition: all 0.4s ease;
-      }
-
-      .profile-image:hover {
-        transform: scale(1.05) rotate(3deg);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      }
-
-      .header-title {
-        font-family: "Bebas Neue", cursive;
-        font-size: 4rem;
-        margin-top: 1.5rem;
-        letter-spacing: 2px;
-        position: relative;
-        z-index: 2;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      }
-
-      .header-subtitle {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.9);
-        margin-top: 0.5rem;
-        position: relative;
-        z-index: 2;
-      }
-
-      .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 2rem;
-        position: relative;
-        z-index: 2;
-      }
-
-      .social-links a {
-        color: white;
-        font-size: 2rem;
-        transition: transform 0.3s ease;
-      }
-
-      .social-links a:hover {
-        transform: scale(1.2) translateY(-5px);
-        color: var(--accent-secondary);
-      }
-
-      /* Container and Section Styling */
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
-      }
-
-      .section {
-        background: white;
-        border-radius: 15px;
-        padding: 3rem;
-        margin: 2rem 0;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: var(--gradient-primary);
-      }
-
-      .section-title {
-        font-family: "Bebas Neue", cursive;
-        text-align: center;
-        color: var(--accent-primary);
-        font-size: 3rem;
-        margin-bottom: 2rem;
-        letter-spacing: 1px;
-      }
-
-      /* Projects Styling */
-      .projects {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-      }
-
-      .project-card {
-        background: var(--bg-secondary);
-        border-radius: 15px;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
-
-      .project-images {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 5px;
-      }
-
-      .project-images img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-        cursor: pointer;
-      }
-
-      .project-images img:hover {
-        transform: scale(1.1);
-      }
-
-      .project-content {
-        padding: 1.5rem;
-        text-align: center;
-      }
-
-      .project-title {
-        font-family: "Bebas Neue", cursive;
-        color: var(--accent-primary);
-        margin-bottom: 0.5rem;
-        font-size: 1.8rem;
-        letter-spacing: 1px;
-      }
-
-      /* Footer Styling */
-      footer {
-        background: var(--text-primary);
-        color: white;
-        text-align: center;
-        padding: 2rem;
-        margin-top: 2rem;
-      }
-
-      footer .heart {
-        color: var(--accent-secondary);
-        animation: pulse 1.5s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-      }
-
-      .tech-skills {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-      }
-
-      .skill-category {
-        background: var(--bg-secondary);
-        border-radius: 15px;
-        padding: 1.5rem;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .skill-category:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
-
-      .skill-category h3 {
-        font-family: "Bebas Neue", cursive;
-        color: var(--accent-primary);
-        margin-bottom: 1rem;
-        letter-spacing: 1px;
-      }
-
-      .skill-icons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.75rem;
-      }
-
-      .skill-icon {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .skill-icon i {
-        font-size: 2.5rem;
-        transition: color 0.3s ease, transform 0.3s ease;
-      }
-
-      .skill-icon span {
-        font-size: 0.7rem;
-        color: var(--text-secondary);
-      }
-
-      /* Language Icons */
-      .fa-python {
-        color: #3776ab;
-      }
-      .fa.java {
-        color: #007396;
-      }
-      .fa-code {
-        color: #777bb3;
-      }
-      .fa-database {
-        color: #336791;
-      }
-      .devicon-r {
-        color: #198ce7;
-      }
-
-      .skill-icon:hover i {
-        transform: scale(1.2);
-      }
-
-      /* Custom icon for specific technologies */
-      .devicon-pytorch::before {
-        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M17.776 7.953l-3.416 3.417 4.588 4.588 1.12-1.12a2.006 2.[...]/></svg>');
-      }
-
-      /* Responsive Adjustments */
-      @media (max-width: 768px) {
-        .header-title {
-          font-size: 3rem;
-        }
-
-        .profile-image {
-          width: 220px;
-          height: 220px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Image Modal -->
-    <div id="imageModal" class="image-modal">
-      <span class="close-modal" onclick="closeModal()">&times;</span>
-      <img class="image-modal-content" id="modalImage" />
+<nav>
+  <div class="wrap">
+    <div class="logo">Joshua<span>.</span>K</div>
+    <div class="navlinks">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
     </div>
+  </div>
+</nav>
 
-    <header>
-      <img src="heroImage.jpg" alt="Joshua Kofoworola" class="profile-image" />
-      <h1 class="header-title">Joshua Kofoworola</h1>
-      <p class="header-subtitle">
-        Oakland, CA | 510-689-6560 |
-        <a
-          href="mailto:Kofoworolajoshua28@gmail.com"
-          style="color: white; text-decoration: none"
-        >
-          Kofoworolajoshua28@gmail.com
-        </a>
-      </p>
-      <div class="social-links">
-        <a href="https://linkedin.com/in/joshua-kofoworola-0538aa346">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/Deazy01">
-          <i class="fab fa-github"></i>
-        </a>
+<header>
+  <div class="wrap">
+    <img class="profile-photo" src="profile.jpg" alt="Joshua Kofoworola" />
+    <span class="badge">Open to internships &amp; entry-level roles</span>
+    <h1>Joshua Kofoworola<br /><span class="grad">Computer Engineering</span></h1>
+    <p class="tagline">UC Davis computer engineering student building embedded systems, IoT devices, and the software that runs on them — from ESP32 firmware and LoRa radios to full-stack apps and search engines.</p>
+    <p class="hero-meta">Oakland, CA &nbsp;·&nbsp; B.Eng. Computer Engineering, UC Davis (Aug 2027)</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-ghost" href="https://github.com/Deazy01" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/joshua-kofoworola" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <p class="section-sub">Things I have designed, built, and shipped — hardware and software.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="kicker">Python · Search Engine</div>
+        <h3>pysearch</h3>
+        <p>A full-text search engine built from scratch in Python: a rule-based tokenizer, positional inverted index, TF-IDF ranking with cosine similarity, and a phrase/boolean query parser. Ships with a Flask REST API, a small web UI, and 37 passing tests.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">TF-IDF</span><span class="tag">Algorithms</span><span class="tag">pytest</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/Deazy01/pysearch" target="_blank" rel="noopener">GitHub Repo →</a>
+        </div>
       </div>
-    </header>
 
-    <main class="container">
-      <section class="section">
-        <h2 class="section-title">Education</h2>
-        <ul>
-          <li>
-            <strong>University of California, Davis</strong><br />
-            B.Eng. in Computer Engineering | Expected Graduation: 2027
-          </li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">Experience</h2>
-        <ul>
-          <li>
-            <strong>N.A.F - Software Engineer Extern</strong>
-            <p>Kaduna, Nigeria (May 2023 — Aug 2023)</p>
-            <p>
-              Spearheaded the development of a web-based aircraft maintenance and tracking system, improving operational accountability and maintenance efficiency.
-            </p>
-            <ul>
-              <li>Processed and analyzed 10,000+ structured JSON records to support system insights and reporting</li>
-              <li>Collaborated with engineering teams to design workflows and deploy system features</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects">
-          <div class="project-card">
-            <div class="project-images">
-              <img
-                src="loraWan.png"
-                alt="LoRaWAN Project"
-                onclick="openModal(this)"
-              />
-              <img
-                src="loraTerminals.png"
-                alt="LoRa Terminals"
-                onclick="openModal(this)"
-              />
-              <img
-                src="hardware2.jpg"
-                alt="Hardware Setup"
-                onclick="openModal(this)"
-              />
-              <img
-                src="lora.jpg"
-                alt="LoRa Hardware Test"
-                onclick="openModal(this)"
-              />
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">
-                LoRaWAN-Based Secure Communication System
-              </h3>
-              <p>
-                A secure communication system for the Nigerian military using
-                LoRaWAN and Expo.
-              </p>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="project-images">
-              <img
-                src="healthmonitor1.png"
-                alt="Health Monitor Software"
-                onclick="openModal(this)"
-              />
-              <img
-                src="glucometer.png"
-                alt="Glucometer"
-                onclick="openModal(this)"
-              />
-              <img
-                src="healthMonitor2.png"
-                alt="Health Monitor"
-                onclick="openModal(this)"
-              />
-              <img
-                src="iotHardware.png"
-                alt="IoT Hardware"
-                onclick="openModal(this)"
-              />
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">IoT Blood Sugar Monitor</h3>
-              <p>
-                An IoT-enabled device for real-time health monitoring and
-                patient care.
-              </p>
-            </div>
-          </div>
+      <div class="card">
+        <div class="kicker">Embedded · LoRa + BLE</div>
+        <h3>Offline BLE + LoRa Chat App</h3>
+        <p>An off-grid messaging app that keeps people talking with no internet and no cell service, relaying messages over Bluetooth Low Energy and long-range LoRa radio on ESP32 hardware.</p>
+        <div class="tags">
+          <span class="tag">ESP32</span><span class="tag">LoRa</span><span class="tag">BLE</span><span class="tag">C/C++</span>
         </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="tech-skills">
-          <div class="skill-category">
-            <h3>Languages</h3>
-            <div class="skill-icons">
-              <div class="skill-icon">
-                <i class="fab fa-python"></i>
-                <span>Python</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fab fa-java"></i>
-                <span>Java</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-code"></i>
-                <span>C/C++</span>
-              </div>
-              <div class="skill-icon">
-                <i class="devicon-r"></i>
-                <span>R</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Libraries & Frameworks</h3>
-            <div class="skill-icons">
-              <div class="skill-icon">
-                <i class="devicon-pytorch"></i>
-                <span>PyTorch</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-chart-line"></i>
-                <span>Pandas</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-superscript"></i>
-                <span>NumPy</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-chart-pie"></i>
-                <span>Matplotlib</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Developer Tools</h3>
-            <div class="skill-icons">
-              <div class="skill-icon">
-                <i class="fab fa-git-alt"></i>
-                <span>Git</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fab fa-docker"></i>
-                <span>Docker</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fab fa-linux"></i>
-                <span>UNIX</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-terminal"></i>
-                <span>Regex</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Databases</h3>
-            <div class="skill-icons">
-              <div class="skill-icon">
-                <i class="fas fa-database"></i>
-                <span>SQL</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-server"></i>
-                <span>MongoDB</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-table"></i>
-                <span>PostgreSQL</span>
-              </div>
-              <div class="skill-icon">
-                <i class="fas fa-columns"></i>
-                <span>pgAdmin</span>
-              </div>
-            </div>
-          </div>
+        <div class="links">
+          <a href="https://github.com/Deazy01/LoraWanCommunications" target="_blank" rel="noopener">GitHub Repo →</a>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <footer>
-      <p>Made with <i class="fas fa-heart heart"></i> by Joshua Kofoworola</p>
-      <p>&copy; 2025 Joshua Kofoworola</p>
-    </footer>
+      <div class="card">
+        <div class="kicker">IoT · LoRaWAN</div>
+        <h3>LoRaWAN Secure Communication System</h3>
+        <p>A secure long-range communication system built on LoRaWAN, designed for reliable messaging where conventional networks are unavailable or untrusted.</p>
+        <div class="tags">
+          <span class="tag">LoRaWAN</span><span class="tag">IoT</span><span class="tag">Embedded Systems</span><span class="tag">Security</span>
+        </div>
+      </div>
 
-    <script>
-      function openModal(imgElement) {
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("modalImage");
-        modal.style.display = "flex";
-        modalImg.src = imgElement.src;
-      }
+      <div class="card">
+        <div class="kicker">IoT · Health Tech</div>
+        <h3>IoT Blood Sugar Monitor</h3>
+        <p>A connected glucose-monitoring device built around ESP32 hardware I assembled, streaming readings over BLE to a React Native app with Firebase for real-time patient monitoring.</p>
+        <div class="tags">
+          <span class="tag">ESP32</span><span class="tag">React Native</span><span class="tag">Firebase</span><span class="tag">BLE</span>
+        </div>
+      </div>
 
-      function closeModal() {
-        const modal = document.getElementById("imageModal");
-        modal.style.display = "none";
-      }
+    </div>
+  </section>
 
-      // Close modal when clicking outside the image
-      window.onclick = function (event) {
-        const modal = document.getElementById("imageModal");
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      };
-    </script>
-  </body>
+  <section id="skills">
+    <h2>Skills</h2>
+    <p class="section-sub">The tools I reach for, grouped by where I use them.</p>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="chips">
+          <span class="tag">Python</span><span class="tag">C / C++</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Software</h3>
+        <div class="chips">
+          <span class="tag">React Native</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Flask</span><span class="tag">Git / GitHub</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Embedded &amp; IoT</h3>
+        <div class="chips">
+          <span class="tag">ESP32</span><span class="tag">Arduino</span><span class="tag">LoRaWAN</span><span class="tag">GSM</span><span class="tag">BLE</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Focus Areas</h3>
+        <div class="chips">
+          <span class="tag">Embedded Systems</span><span class="tag">IoT</span><span class="tag">Machine Learning</span><span class="tag">TF-IDF</span><span class="tag">Random Forest</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <p class="section-sub">&nbsp;</p>
+    <div class="block">
+      <h3>Software Engineer Extern — N.A.F</h3>
+      <div class="when">Kaduna, Nigeria · May 2023 – Aug 2023</div>
+      <ul>
+        <li>Built a web-based aircraft maintenance and tracking system that improved operational accountability and maintenance efficiency.</li>
+        <li>Developed machine-learning models (Random Forest) for predictive maintenance, flagging likely failures before they grounded aircraft.</li>
+        <li>Worked with engineering teams to design workflows and ship system features.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <p class="section-sub">&nbsp;</p>
+    <div class="block">
+      <h3>University of California, Davis</h3>
+      <div class="when">B.Eng. Computer Engineering · Graduating August 2027 · GPA 3.5</div>
+    </div>
+    <div class="block">
+      <h3>Berkeley City College</h3>
+      <div class="when">A.S. Computer Science · GPA 3.7</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="section-sub">I am looking for internships and entry-level roles in embedded systems, IoT, and software engineering. The fastest way to reach me is email.</p>
+    <div class="block">
+      <p>
+        Email: <a href="mailto:Kofoworolajoshua28@gmail.com">Kofoworolajoshua28@gmail.com</a><br />
+        Phone: (510) 689-6569<br />
+        Location: Oakland, CA — open to roles across the US, remote or on-site
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <a href="https://github.com/Deazy01" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/joshua-kofoworola" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="mailto:Kofoworolajoshua28@gmail.com">Email</a>
+    </p>
+    <p style="margin-top:10px">© 2026 Joshua Kofoworola</p>
+  </div>
+</footer>
+
+</body>
 </html>
